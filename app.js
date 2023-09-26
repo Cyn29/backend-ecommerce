@@ -1,7 +1,8 @@
-import express, { application } from "express";
+import express from "express";
 import cors from "cors";
 import db from "./database/db.js";
 import productRouter from "./routes/productRouter.js";
+import categoryRouter from "./routes/categoryRouter.js";
 
 export const APP = express();
 APP.get("/", (req, res) => {
@@ -11,6 +12,7 @@ APP.get("/", (req, res) => {
 APP.use(cors());
 APP.use(express.json());
 APP.use("/products", productRouter);
+APP.use("/categories", categoryRouter);
 
 try {
     await db.authenticate();

@@ -11,18 +11,35 @@ export const getAllProducts = async (req, res) => {
 
 export const createNewProduct = async (req, res) => {
     try {
-        const { title, product_description, price, category_id } = req.body;
-        if(!title || !product_description || !price || !category_id) {
-            return res.status(400).json({message: "All fields are required"});
-        }
-        const newProduct = await ProductModel.create({
-            title,
-            product_description,
-            price,
-            category_id
+        await ProductModel.create(req.body);
+        res.status(200).json({ message: "Product created successfully!" });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const updateProduct = async (req, res) => {
+    try {
+        const updatedProduct = await ProductModel.update(req.body, {
+            where: { product_id: req.params.product_id },
         });
-        res.status(201).json(newProduct);
-    }catch (error) {
-        res.status(500).json({message: error.message});
+        if (updatedProduct) {
+            return res.status(200).json({ message: "Product has been updated successfully!" });
+        }
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+};
+
+export const deleteProduct = async (req, res) => {
+    try {
+        const deletedProduct = await ProductModel.destroy({
+            where: { product_id: req.params.product_id },
+        });
+        if (deletedProduct) {
+            return res.status(200).json({ message: "Product has been deleted successfully!" });
+        }
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
     }
 };
