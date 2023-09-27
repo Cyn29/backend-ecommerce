@@ -24,7 +24,7 @@ describe("Test CRUD categories table", () => {
         const wrongCategory = {
             wrong_field: 0,
         }
-        test("should return a response with status 200 and type json", async () => {
+        test("should return a response with status 201 and type json", async () => {
             const response = await request(APP).post("/categories").send(newCategory);
             expect(response.body.message).toContain("Category created successfully!")
         });

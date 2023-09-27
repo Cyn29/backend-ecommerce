@@ -10,8 +10,8 @@ describe("Test CRUD products table", () => {
             response = await request(APP).get("/products").send();
         });
         test("should return a response with status 200 and type json", async () => {
-            expect(response.status).toBe(200);
-            expect(response.headers["content-type"]).toContain("json");
+            expect(response.statusCode).toBe(200);
+            expect(response.headers["content-type"]).toEqual(expect.stringContaining("json"));
         });
         test("should return all products", async () => {
             expect(response.body).toBeInstanceOf(Array);
@@ -27,7 +27,7 @@ describe("Test CRUD products table", () => {
         const wrongProduct = {
             wrong_field: "test",
         }
-        test("should return a response with status 200 and type json", async () => {
+        test("should return a response with status 201 and type json", async () => {
             const response = await request(APP).post("/products").send(newProduct);
             expect(response.body.message).toContain("Product created successfully!")
         });

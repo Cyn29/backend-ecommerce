@@ -12,7 +12,7 @@ export const getAllCategories = async(req, res) => {
 export const createCategory = async (req, res) => {
     try {
         await CategoryModel.create(req.body);
-        res.status(200).json({message: "Category created successfully!"})
+        res.status(201).json({message: "Category created successfully!"})
     }catch (error) {
         res.status(500).json({message: error.message})
     }
