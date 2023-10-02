@@ -21,6 +21,37 @@ const getProducts = {
     },
 };
 
+const getProductById = {
+    tags: ["products"],
+    summary: "Get product by ID",
+    parameters: [
+        {
+            in: "path",
+            name: "product_id",
+            required: true,
+            description: "Product ID",
+            schema: {
+                type: "integer",
+            },
+        },
+    ],
+    responses: {
+        200: {
+            description: "OK",
+            content: {
+                "application/json": {
+                    schema: {
+                        $ref: "#/components/schemas/Product",
+                    },
+                },
+            },
+        },
+        404: {
+            description: "Product not found",
+        },
+    },
+};
+
 const getCategories = {
     tags: ["categories"],
     summary: "Get all categories",
@@ -37,6 +68,37 @@ const getCategories = {
         },
         404: {
             description: "Categories not found",
+        },
+    },
+};
+
+const getCategoryById = {
+    tags: ["categories"],
+    summary: "Get products by category",
+    parameters: [
+        {
+            in: "path",
+            name: "category_id",
+            required: true,
+            description: "Category ID",
+            schema: {
+                type: "integer",
+            },
+        },
+    ],
+    responses: {
+        200: {
+            description: "OK",
+            content: {
+                "application/json": {
+                    schema: {
+                        $ref: "#/components/schemas/Product",
+                    },
+                },
+            },
+        },
+        404: {
+            description: "Category not found",
         },
     },
 };
@@ -295,7 +357,7 @@ const options = {
         "./routes/productRouter.js",
         "./routes/categoryRouter.js",
     ], 
-    operations: [getProducts, getCategories, postProduct, postCategory, putProduct, putCategory, deleteProduct, deleteCategory], 
+    operations: [getProducts, getProductById, getCategories, getCategoryById, postProduct, postCategory, putProduct, putCategory, deleteProduct, deleteCategory], 
 };
 
 const swaggerSpec = swaggerJSDoc(options);

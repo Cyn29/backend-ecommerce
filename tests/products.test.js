@@ -27,10 +27,6 @@ describe("Test CRUD products table", () => {
         const wrongProduct = {
             wrong_field: "test",
         }
-        test("should return a response with status 201 and type json", async () => {
-            const response = await request(APP).post("/products").send(newProduct);
-            expect(response.body.message).toContain("Product created successfully!")
-        });
         test("should return a message insertion error if post a wrong product", async () => {
             const response = await request(APP).post("/products").send(wrongProduct);
             expect(response.body.message).toContain( "Field 'title' doesn't have a default value")

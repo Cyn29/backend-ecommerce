@@ -1,5 +1,5 @@
 import express from "express";
-import { getAllProducts, getProductsByCategory, createProduct, updateProduct, deleteProduct } from "../controllers/productController.js";
+import { getAllProducts, getProductById, getProductsByCategory, createProduct, updateProduct, deleteProduct } from "../controllers/productController.js";
 
 const router = express.Router();
 router.get("/", getAllProducts);
@@ -20,7 +20,56 @@ router.get("/", getAllProducts);
  *       404:
  *         description: Products not found
  */
+router.get("/:product_id", getProductById);
+/**
+ * @swagger
+ * /products/{product_id}:
+ *   get:
+ *     tags:
+ *       - products
+ *     summary: Get product by ID
+ *     parameters:
+ *       - in: path
+ *         name: product_id
+ *         required: true
+ *         description: Product ID
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/Product"
+ *       404:
+ *         description: Product not found
+ */
 router.get("/:category_id", getProductsByCategory);
+/**
+ * @swagger
+ * /products/{category_id}:
+ *   get:
+ *     tags:
+ *       - products
+ *     summary: Get products by category
+ *     parameters:
+ *       - in: path
+ *         name: category_id
+ *         required: true
+ *         description: Category ID
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/Product"
+ *       404:
+ *         description: Category not found
+ */
 router.post("/", createProduct);
 /**
  * @swagger

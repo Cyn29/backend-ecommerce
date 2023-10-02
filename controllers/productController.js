@@ -9,6 +9,19 @@ export const getAllProducts = async (req, res) => {
     }
 };
 
+export const getProductById = async (req, res) => {
+    try {
+        const productById = await ProductModel.findAll({
+            where: {product_id: req.params.product_id},
+        })
+        if(productById) {
+            res.status(200).json(productById)
+        }
+    }catch (error) {
+        res.status(500).json({message: error.message})
+    }
+}
+
 export const getProductsByCategory = async (req, res) => {
     try {
         const productsByCategory = await ProductModel.findAll( {
