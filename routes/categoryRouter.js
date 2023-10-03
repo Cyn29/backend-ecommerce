@@ -1,5 +1,5 @@
 import express from "express";
-import { getAllCategories, createCategory, updateCategory, deleteCategory } from "../controllers/categoryController.js";
+import { getAllCategories, getCategoryById, createCategory, updateCategory, deleteCategory } from "../controllers/categoryController.js";
 
 const router = express.Router();
 router.get("/", getAllCategories);
@@ -19,6 +19,33 @@ router.get("/", getAllCategories);
  *               $ref: "#/components/schemas/Category"
  *       404:
  *         description: Categories not found
+ */
+router.get("/:category_id", getCategoryById);
+/**
+ * @swagger
+ * /categories/{category_id}:
+ *   get:
+ *     tags:
+ *       - categories
+ *     summary: Get category by ID
+ *     parameters:
+ *       - in: path
+ *         name: category_id
+ *         required: true
+ *         description: Category ID
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/Category"
+ *       400:
+ *         description: Bad request
+ *       404:
+ *         description: Category not found
  */
 router.post("/", createCategory);
 /**

@@ -9,6 +9,19 @@ export const getAllCategories = async(req, res) => {
     }
 }
 
+export const getCategoryById = async (req, res) => {
+    try {
+        const categoryById = await CategoryModel.findAll({
+            where: {category_id: req.params.category_id},
+        })
+        if(categoryById) {
+            res.status(200).json(categoryById)
+        }
+    }catch (error) {
+        res.status(500).json({message: error.message})
+    }
+}
+
 export const createCategory = async (req, res) => {
     try {
         await CategoryModel.create(req.body);
