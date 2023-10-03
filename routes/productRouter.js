@@ -45,10 +45,10 @@ router.get("/:product_id", getProductById);
  *       404:
  *         description: Product not found
  */
-router.get("/:category_id", getProductsByCategory);
+router.get("/categories/:category_id", getProductsByCategory);
 /**
  * @swagger
- * /products/{category_id}:
+ * /products/categories/{category_id}:
  *   get:
  *     tags:
  *       - products

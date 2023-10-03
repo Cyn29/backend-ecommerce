@@ -15,13 +15,6 @@ APP.use(express.json());
 APP.use("/products", productRouter);
 APP.use("/categories", categoryRouter);
 
-try {
-    await db.authenticate();
-    console.log("conected to database");
-}catch{
-    console.log(`error: ${error}`);
-}
-
 export const server = APP.listen(8000, () => {
     console.log("🚀 server up in http://localhost:8000/");
     swaggerDocs(APP, 8000);
